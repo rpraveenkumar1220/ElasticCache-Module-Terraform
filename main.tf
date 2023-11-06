@@ -38,11 +38,13 @@ resource "aws_elasticache_replication_group" "replica_group" {
   port                       = var.port
   parameter_group_name       = var.parameter_group_name
   automatic_failover_enabled = true
-  transit_encryption_enabled = true
+  at_rest_encryption_enabled = true
   kms_key_id                 = var.kms_key_arn
   num_node_groups            = var.num_node_groups
   replicas_per_node_group    = var.replicas_per_node_group
-  vpc_security_group_ids     = [ aws_security_group.SG.id]
+  security_group_ids         = [aws_security_group.SG.id]
   subnet_group_name          = aws_elasticache_subnet_group.elastic_subnet_group.name
-  skip_final_snapshot        = true
 }
+
+
+
